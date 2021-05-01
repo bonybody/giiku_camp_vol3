@@ -2,6 +2,11 @@ import path from 'path'
 import fs from 'fs'
 
 export default {
+  env: {
+    liffId: process.env.LIFF_ID,
+    functionsUrl: process.env.FUNCTIONS_URL
+  },
+
   server: {
     https: {
       key: fs.readFileSync(path.resolve(__dirname, 'localhost-key.pem')),
@@ -46,7 +51,10 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [
+    '@/plugins/client-init',
+    '@/plugins/auth'
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: false,
