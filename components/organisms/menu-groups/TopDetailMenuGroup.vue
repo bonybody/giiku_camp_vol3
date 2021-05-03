@@ -3,7 +3,7 @@
     <ul>
       <template v-for="(menu, index) in menus">
         <li :key="index" class="mb-3">
-          <app-detail-menu :title="menu.title" :text="menu.text" :link="menu.link" :image="menu.image" :color="menu.color" />
+          <detail-menu :title="menu.title" :text="menu.text" :link="menu.link" :image="menu.image" :color="menu.color" />
         </li>
       </template>
     </ul>
@@ -11,10 +11,10 @@
 </template>
 
 <script>
-import AppDetailMenu from '@/components/molecules/menus/AppDetailMenu'
+import detailMenu from '@/components/molecules/menus/detailMenu'
 export default {
   name: 'TopDetailMenuGroup',
-  components: { AppDetailMenu },
+  components: { detailMenu },
   data () {
     return {
       menus: [
@@ -41,7 +41,7 @@ export default {
           text: '届いたユメ、書いたユメを<br>' +
               '記憶しておく場所です<br>' +
               'ユメを思い出してみましょう',
-          link: { text: '記憶を確認', to: '#' },
+          link: { text: '記憶を辿る', to: '#' },
           image: require('@/assets/images/menu_icons/yume_kioku.png'),
           color: 'current'
         },

@@ -1,7 +1,7 @@
 <template>
-  <div class="rounded-frame bg-white flex justify-between items-stretch p-3 box-border">
+  <div class="rounded-frame shadow-md bg-white flex justify-between items-stretch p-3 box-border">
     <div class="flex-grow rounded-frame pr-3">
-      <img :src="image" :alt="title" class="rounded-frame block">
+      <img :src="image" :alt="title" class="rounded-frame shadow block">
     </div>
     <div class="flex-grow-0 w-64 flex flex-wrap">
       <div class="w-full">
@@ -10,7 +10,7 @@
         </app-heading>
       </div>
       <p class="w-full text-sm text-gray-400" v-html="text" />
-      <div class="w-full self-end text-right" :class="{[thisColor]: true}">
+      <div class="w-full self-end text-right p-2" :class="{[thisColor]: true}">
         <nuxt-link :to="link.to">
           {{ link.text }}
         </nuxt-link>
