@@ -11,10 +11,10 @@
 </template>
 
 <script>
-import detailMenu from '@/components/molecules/menus/detailMenu'
+import DetailMenu from '@/components/molecules/menus/DetailMenu'
 export default {
   name: 'TopDetailMenuGroup',
-  components: { detailMenu },
+  components: { DetailMenu },
   data () {
     return {
       menus: [

@@ -22,7 +22,7 @@
 <script>
 import AppHeading from '@/components/atoms/headings/AppHeading'
 export default {
-  name: 'AppDetailMenu',
+  name: 'DetailMenu',
   components: { AppHeading },
   props: {
     title: {
