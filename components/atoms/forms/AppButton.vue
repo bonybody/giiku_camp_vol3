@@ -1,19 +1,18 @@
 <template>
   <button
-    class="
-      px-3
-      leading-9
-      min-w-button
-      hover:bg-opacity-30
-      rounded text-sm
-      font-bold
-      transition-colors
-    "
+    v-if="!to"
     :class="getClasses"
     @click="$emit('click')"
   >
     <slot />
   </button>
+  <nuxt-link
+    v-else
+    :class="getClasses"
+    :to="to"
+  >
+    <slot />
+  </nuxt-link>
 </template>
 
 <script>
@@ -23,6 +22,12 @@ export default {
     color: {
       type: String,
       default: 'primary'
+    },
+    to: {
+      type: [Object, String],
+      default () {
+        return null
+      }
     }
   },
   computed: {
@@ -34,6 +39,16 @@ export default {
       }
       return {
         [textColor]: true,
+        'inline-block': true,
+        'text-center': true,
+        'px-3': true,
+        'leading-9': true,
+        'min-w-button': true,
+        'hover:bg-opacity-30': true,
+        rounded: true,
+        'text-sm': true,
+        'font-bold': true,
+        'transition-colors': true,
         ...hover
       }
     }
