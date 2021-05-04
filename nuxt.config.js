@@ -1,4 +1,19 @@
+import path from 'path'
+import fs from 'fs'
+
 export default {
+  env: {
+    liffId: process.env.LIFF_ID,
+    functionsUrl: process.env.FUNCTIONS_URL
+  },
+
+  server: {
+    https: {
+      key: fs.readFileSync(path.resolve(__dirname, 'localhost-key.pem')),
+      cert: fs.readFileSync(path.resolve(__dirname, 'localhost.pem'))
+    }
+  },
+
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
 
@@ -33,10 +48,15 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
+  css: [
+    '@/assets/index.scss'
+  ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [
+    '@/plugins/client-init',
+    '@/plugins/auth'
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: false,
@@ -48,6 +68,10 @@ export default {
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss'
   ],
+
+  // tailwindcss: {
+  //   jit: true
+  // },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
@@ -66,7 +90,7 @@ export default {
   babel: {
     plugins: [
       '@babel/plugin-proposal-class-properties',
-      '@babel/plugin-proposal-private-methods',
+      '@babel/plugin-proposal-private-methods'
     ]
   },
 
