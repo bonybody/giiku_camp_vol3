@@ -1,10 +1,10 @@
 <template>
   <nav>
-    <ul>
+    <ul class="flex">
       <template v-for="(menu, index) in menus">
-        <li :key="index">
-          <nuxt-link :to="menu.to" class="text-primary">
-            <app-button color="white">
+        <li :key="index" class="ml-4">
+          <nuxt-link :to="menu.to">
+            <app-button :to="menu.to">
               {{ menu.text }}
             </app-button>
           </nuxt-link>
