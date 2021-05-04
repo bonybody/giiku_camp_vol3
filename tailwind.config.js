@@ -21,6 +21,9 @@ module.exports = {
       colors: {
         primary: '#F96A76',
         secondary: '#7BCCAC'
+      },
+      minWidth: {
+        button: '64px'
       }
     }
   },
