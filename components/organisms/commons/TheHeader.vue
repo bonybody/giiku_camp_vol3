@@ -7,7 +7,7 @@
 <script>
 import TheGlobalNav from '@/components/molecules/commons/TheGlobalNav'
 export default {
-  name: 'ThelHeader',
+  name: 'TheHeader',
   components: { TheGlobalNav }
 }
 </script>

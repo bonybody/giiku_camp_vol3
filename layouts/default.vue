@@ -1,6 +1,6 @@
 <template>
   <div class="wrap">
-    <thel-header />
+    <the-header />
     <main class="box-border p-3">
       <Nuxt />
     </main>
@@ -8,9 +8,9 @@
 </template>
 
 <script>
-import ThelHeader from '@/components/organisms/commons/ThelHeader'
+import TheHeader from '@/components/organisms/commons/TheHeader'
 
 export default {
-  components: { ThelHeader }
+  components: { TheHeader }
 }
 </script>
