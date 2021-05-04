@@ -16,11 +16,14 @@ module.exports = {
   theme: {
     extend: {
       borderRadius: {
-        frame: '8px'
+        frame: '8px',
+        '1/2': '50%'
       },
       colors: {
         primary: '#F96A76',
-        secondary: '#7BCCAC'
+        secondary: '#7BCCAC',
+        bold: '#333333',
+        slim: '#666666'
       },
       minWidth: {
         button: '64px'
