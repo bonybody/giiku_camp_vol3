@@ -24,7 +24,7 @@ export default {
               '今日もとどいているかも...<br>' +
               '一緒に見にきませんか？',
           link: { text: 'ポストを確認', to: 'post' },
-          image: require('@/assets/images/menu_icons/yume_post.png'),
+          image: require('@/assets/images/menu_icons/yume_post.svg'),
           color: 'primary'
         },
         {
@@ -33,7 +33,7 @@ export default {
               'どんなユメでも構いません<br>' +
               '貴方のユメを教えてください',
           link: { text: 'ユメを書く', to: '#' },
-          image: require('@/assets/images/menu_icons/yume_tayori.png'),
+          image: require('@/assets/images/menu_icons/yume_tayori.svg'),
           color: 'secondary'
         },
         {
@@ -42,15 +42,15 @@ export default {
               '記憶しておく場所です<br>' +
               'ユメを思い出してみましょう',
           link: { text: '記憶を辿る', to: '#' },
-          image: require('@/assets/images/menu_icons/yume_kioku.png'),
-          color: 'current'
+          image: require('@/assets/images/menu_icons/yume_kioku.svg'),
+          color: 'slim'
         },
         {
           title: '設定',
           text: 'サービスの設定を行います。',
           link: { text: '設定', to: 'setting' },
-          image: require('@/assets/images/menu_icons/setting.png'),
-          color: 'current'
+          image: require('@/assets/images/menu_icons/setting.svg'),
+          color: 'gray-400'
         }
       ]
     }
