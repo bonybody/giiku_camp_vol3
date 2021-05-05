@@ -49,6 +49,7 @@ export default {
         'text-sm': true,
         'font-bold': true,
         'transition-colors': true,
+        'focus:outline-none': true,
         ...hover
       }
     }

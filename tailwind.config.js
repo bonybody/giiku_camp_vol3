@@ -15,6 +15,15 @@ module.exports = {
   // 予め定義しておきたいutilities
   theme: {
     extend: {
+      width: {
+        content: '400px'
+      },
+      maxWidth: {
+        content: '400px'
+      },
+      minWidth: {
+        button: '64px'
+      },
       borderRadius: {
         frame: '8px',
         '1/2': '50%'
@@ -24,9 +33,6 @@ module.exports = {
         secondary: '#7BCCAC',
         bold: '#333333',
         slim: '#666666'
-      },
-      minWidth: {
-        button: '64px'
       }
     }
   },
