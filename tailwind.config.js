@@ -33,6 +33,9 @@ module.exports = {
         secondary: '#7BCCAC',
         bold: '#333333',
         slim: '#666666'
+      },
+      zIndex: {
+        top: '9999'
       }
     }
   },
