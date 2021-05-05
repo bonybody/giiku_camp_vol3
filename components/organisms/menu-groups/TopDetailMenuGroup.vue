@@ -41,7 +41,7 @@ export default {
           text: '届いたユメ、書いたユメを<br>' +
               '記憶しておく場所です<br>' +
               'ユメを思い出してみましょう',
-          link: { text: '記憶を辿る', to: '#' },
+          link: { text: '記憶を辿る', to: 'yume_kioku' },
           image: require('@/assets/images/menu_icons/yume_kioku.svg'),
           color: 'slim'
         },
