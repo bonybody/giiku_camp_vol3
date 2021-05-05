@@ -6,4 +6,7 @@
   b, strong {
     font-family: -apple-system, BlinkMacSystemFont, Roboto, "Segoe UI semibold", "Helvetica Neue", HelveticaNeue, YuGothic, "Yu Gothic", "Segoe UI", Verdana, Meiryo, sans-serif;
   }
+  button {
+    @apply focus:outline-none;
+  }
 }
