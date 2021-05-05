@@ -1,5 +1,10 @@
 <template>
   <div class="max-w-content mx-auto">
+    <div class="mb-4">
+      <app-heading :level="2" size="2xl">
+        ユメの記憶
+      </app-heading>
+    </div>
     <div class="h-32">
       <content-header color="slim" :image="image">
         <template #heading>
@@ -14,14 +19,19 @@
         </template>
       </content-header>
     </div>
+    <div>
+      <yume-kioku-tab-group />
+    </div>
   </div>
 </template>
 
 <script>
+import AppHeading from '@/components/atoms/headings/AppHeading'
 import ContentHeader from '@/components/molecules/commons/ContentHeader'
+import YumeKiokuTabGroup from '@/components/organisms/tab-groups/YumeKiokuTabGroup'
 
 export default {
-  components: { ContentHeader },
+  components: { ContentHeader, AppHeading, YumeKiokuTabGroup },
   data () {
     return {
       image: {
