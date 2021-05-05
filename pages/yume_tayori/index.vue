@@ -24,7 +24,7 @@ export default {
   data () {
     return {
       image: {
-        src: require('@/assets/images/menu_icons/yume_tayori.svg'),
+        src: require('assets/images/menu_icons/yume_tayori.svg'),
         alt: 'ユメタヨリ'
       }
     }

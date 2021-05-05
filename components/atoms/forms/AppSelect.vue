@@ -19,8 +19,8 @@
     @blur="$emit('blur')"
   >
     <template v-for="(option, index) in options">
-      <option :key="index" :value="option.value">
-        {{ option.text }}
+      <option :key="index" :value="option">
+        {{ option }}
       </option>
     </template>
   </select>
