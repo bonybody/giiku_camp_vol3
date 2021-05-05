@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
     <the-header />
-    <main class="box-border p-3">
+    <main class="box-border p-6">
       <Nuxt />
     </main>
   </div>

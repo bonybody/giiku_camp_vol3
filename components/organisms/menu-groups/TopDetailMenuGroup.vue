@@ -48,7 +48,7 @@ export default {
         {
           title: '設定',
           text: 'サービスの設定を行います。',
-          link: { text: '設定', to: 'setting' },
+          link: { text: '設定', to: '/setting' },
           image: require('@/assets/images/menu_icons/setting.svg'),
           color: 'gray-400'
         }
