@@ -37,8 +37,8 @@ export default {
       get () {
         return this.currentTab
       },
-      set (tab) {
-        this.$emit('input', tab)
+      set (id) {
+        this.$emit('input', id)
       }
     }
   }
