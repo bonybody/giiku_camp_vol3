@@ -29,20 +29,30 @@ export default {
   },
   data () {
     return {
-      title: null,
-      category: null,
-      text: null,
+      title: '',
+      category: '',
+      text: '',
       categoryOptions: [
-        {
-          text: '怖い夢',
-          value: 'scared'
-        }
+        '怖い夢'
       ]
+    }
+  },
+  fetch () {
+    if (this.$route.query.title) {
+      const params = this.$route.query
+      this.title = params.title
+      this.category = params.category
+      this.text = params.text
     }
   },
   methods: {
     formSubmit () {
-      console.log('hoge')
+      const query = {
+        title: this.title,
+        category: this.category,
+        text: this.text
+      }
+      this.$router.push({ path: '/yume_tayori/preview', query })
     }
   }
 }
