@@ -20,7 +20,6 @@ export default async function ({ $fire, $axios }, inject) {
       const query = `?accessToken=${accessToken}`
       const getTokenUrl = encodeURI(baseUrl + query)
       // customTokenを作成
-      // eslint-disable-next-line no-unused-vars
       const customToken = await $axios.$get(getTokenUrl)
       // customTokenを使ってfirebaseにログイン
       await $fire.auth.signInWithCustomToken(customToken)
