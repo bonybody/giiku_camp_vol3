@@ -19,7 +19,7 @@
         bg-primary
         text-primary"
     >
-      {{ category }}
+      {{ category.text }}
     </div>
     <div class="mb-4 w-full relative">
       <template v-for="(value, index) in getTextLineArray">
@@ -59,8 +59,10 @@ export default {
       require: true
     },
     category: {
-      type: String,
-      default: '',
+      type: Object,
+      default () {
+        return {}
+      },
       require: true
     },
     text: {

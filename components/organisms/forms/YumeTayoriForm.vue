@@ -37,12 +37,18 @@ export default {
       ]
     }
   },
-  fetch () {
+  async fetch () {
     if (this.$route.query.title) {
       const params = this.$route.query
       this.title = params.title
       this.category = params.category
       this.text = params.text
+    }
+    try {
+      const categories = await this.$api.category.getCategories()
+      this.categoryOptions = categories
+    } catch (e) {
+      console.error(e)
     }
   },
   methods: {

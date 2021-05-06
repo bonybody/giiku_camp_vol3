@@ -18,9 +18,9 @@
     @focus="$emit('focus')"
     @blur="$emit('blur')"
   >
-    <template v-for="(option, index) in options">
-      <option :key="index" :value="option">
-        {{ option }}
+    <template v-for="option in options">
+      <option :key="option.id" :value="option">
+        {{ option.text }}
       </option>
     </template>
   </select>
