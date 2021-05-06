@@ -22,7 +22,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'giiku_camp_vol3',
+    title: 'ユメタヨリ',
     htmlAttrs: {
       lang: 'en'
     },
@@ -41,8 +41,8 @@ export default {
     link: [
       {
         rel: 'icon',
-        type: 'image/x-icon',
-        href: '/favicon.ico'
+        type: 'image/svg+xml',
+        href: '/favicon.svg'
       }
     ]
   },
