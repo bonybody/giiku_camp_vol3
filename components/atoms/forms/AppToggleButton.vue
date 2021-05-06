@@ -1,0 +1,63 @@
+<template>
+  <div class="flex items-center w-full">
+    <label for="toggleB" class="flex items-center cursor-pointer">
+      <!-- label -->
+      <slot />
+      <!-- toggle -->
+      <div class="relative">
+        <!-- input -->
+        <input id="toggleB" type="checkbox" class="sr-only" @click="$emit('input', isState)">
+        <!-- line -->
+        <div :class="getLineClasses" class="transition-colors block w-14 h-8 rounded-full" />
+        <!-- dot -->
+        <div :class="getDotClasses" class="bg-white absolute top-1 w-6 h-6 rounded-full transition shadow-md" />
+      </div>
+    </label>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'AppToggleButton',
+  props: {
+    isState: {
+      type: Boolean,
+      default: null,
+      require: true
+    }
+  },
+  data () {
+    return {
+      isFirstBool: null
+    }
+  },
+  computed: {
+    getLineClasses () {
+      const bgColor = this.isState ? 'primary' : 'gray-400'
+      return {
+        [`bg-${bgColor}`]: true
+      }
+    },
+    getDotClasses () {
+      const firstDotPosition = this.isFirstBool ? 'right' : 'left'
+      return {
+        [`${firstDotPosition}-1`]: true,
+        [`dot-${this.isFirstBool}`]: true
+      }
+    }
+  },
+  mounted () {
+    this.isFirstBool = this.isState
+  }
+}
+</script>
+
+<style scoped>
+input:checked ~ .dot-true {
+  transform: translateX(-100%);
+}
+
+input:checked ~ .dot-false {
+  transform: translateX(100%);
+}
+</style>

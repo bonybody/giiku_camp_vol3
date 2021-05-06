@@ -3,7 +3,7 @@
     <div>
       <tab-menu v-model="current" :tabs="tabs" :current-tab="current" />
     </div>
-    <template v-for="(previewItem, index) in previewItemData">
+    <template v-for="(previewItem, index) in previewItems">
       <div :key="index" class="mt-4">
         <preview-item :title="previewItem.title" :is-myself="previewItem.isMyself">
           <div class="text-right">
@@ -38,7 +38,7 @@ export default {
   components: { TabMenu, PreviewItem },
   data () {
     return {
-      previewItemData: [
+      previewItems: [
         {
           isMyself: false,
           title: 'ユメポスト',
@@ -93,7 +93,7 @@ export default {
     changeFavorite (index) {
       /* firestoreの処理 */
       // await
-      this.previewItemData[index].isFavorite = !this.previewItemData[index].isFavorite
+      this.previewItems[index].isFavorite = !this.previewItems[index].isFavorite
     }
   }
 }
