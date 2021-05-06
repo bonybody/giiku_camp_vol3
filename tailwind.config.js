@@ -22,7 +22,8 @@ module.exports = {
         content: '400px'
       },
       minWidth: {
-        button: '64px'
+        button: '64px',
+        dialog: '240px'
       },
       borderRadius: {
         frame: '8px',
