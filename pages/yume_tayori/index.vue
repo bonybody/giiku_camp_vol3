@@ -1,5 +1,11 @@
 <template>
   <div class="max-w-content mx-auto">
+    <div class="mb-4">
+      <app-heading :level="2" size="2xl">
+        ユメタヨリ
+      </app-heading>
+    </div>
+
     <div class="h-32">
       <content-header color="secondary" :image="image">
         <template #heading>
@@ -18,9 +24,10 @@
 <script>
 import YumeTayoriForm from '@/components/organisms/forms/YumeTayoriForm'
 import ContentHeader from '@/components/molecules/commons/ContentHeader'
+import AppHeading from '@/components/atoms/headings/AppHeading'
 
 export default {
-  components: { ContentHeader, YumeTayoriForm },
+  components: { AppHeading, ContentHeader, YumeTayoriForm },
   data () {
     return {
       image: {
