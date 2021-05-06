@@ -1,7 +1,7 @@
 <template>
   <div class="w-full box-border p-4 bg-white rounded-b-frame shadow-md">
     <div>
-      <service-settings />
+      <service-settings v-model="notification" :current-notification="notification" />
     </div>
     <hr class="w-full my-4">
     <div>
@@ -26,13 +26,14 @@
 <script>
 import ServiceSettings from '@/components/molecules/setting/ServiceSettings'
 import PreviewItem from '@/components/molecules/tabs/PreviewItem'
-import AppButton from '@/components/atoms/forms/AppButton.vue'
-import AppHeading from '@/components/atoms/headings/AppHeading.vue'
+import AppButton from '@/components/atoms/forms/AppButton'
+import AppHeading from '@/components/atoms/headings/AppHeading'
 
 export default {
   components: { ServiceSettings, PreviewItem, AppButton, AppHeading },
   data () {
     return {
+      currentNotification: false,
       previewItems: [
         {
           isMyself: false,
@@ -60,7 +61,24 @@ export default {
         }
       ]
     }
+  },
+  computed: {
+    notification: {
+      get () {
+        return this.currentNotification
+      },
+      set (bool) {
+        this.currentNotification = !this.currentNotification
+      }
+    }
   }
+  // fetch () {
+  /*
+      firestoreの必要なデータ
+        - isMyself: コンテンツの種類を判断
+        - isNotification: 現在のユーザーの通知設定
+    */
+  // }
 }
 </script>
 
