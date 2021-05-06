@@ -13,12 +13,20 @@
       <template v-for="(previewItem, index) in previewItems">
         <div :key="index" class="mt-4">
           <preview-item :title="previewItem.title" :is-myself="previewItem.isMyself">
-            <app-button color="red-500">
+            <app-button color="red-500" @click="handleDialog">
               記憶を消す
             </app-button>
           </preview-item>
         </div>
       </template>
+    </div>
+    <div v-if="isDialog === true">
+      <app-dialog
+        :is-close-action="true"
+        :title="dialog.title"
+        :text="dialog.text"
+        @close-dialog="handleDialog"
+      />
     </div>
   </div>
 </template>
@@ -28,11 +36,17 @@ import ServiceSettings from '@/components/molecules/setting/ServiceSettings'
 import PreviewItem from '@/components/molecules/tabs/PreviewItem'
 import AppButton from '@/components/atoms/forms/AppButton'
 import AppHeading from '@/components/atoms/headings/AppHeading'
+import AppDialog from '@/components/molecules/commons/AppDialog'
 
 export default {
-  components: { ServiceSettings, PreviewItem, AppButton, AppHeading },
+  components: { ServiceSettings, PreviewItem, AppButton, AppHeading, AppDialog },
   data () {
     return {
+      isDialog: false,
+      dialog: {
+        title: '記憶を消去します',
+        text: 'ユメタヨリの記憶を削除するとユメタヨリを受け取った人の記憶も消去されます'
+      },
       currentNotification: false,
       previewItems: [
         {
@@ -70,6 +84,11 @@ export default {
       set (bool) {
         this.currentNotification = !this.currentNotification
       }
+    }
+  },
+  methods: {
+    handleDialog () {
+      this.isDialog = !this.isDialog
     }
   }
   // fetch () {
