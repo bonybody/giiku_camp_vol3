@@ -1,14 +1,14 @@
 <template>
   <header class="bg-white shadow-md h-12">
-    <div class="flex justify-between h-full items-center max-w-screen-lg box-border p-1 m-auto">
-      <nuxt-link class="flex items-center h-full" to="/">
-        <div class="h-full mr-1">
-          <img class="h-full" :src="siteLogo.src" :alt="siteLogo.alt">
-        </div>
-        <app-heading :level="1" :size="'2xl'">
+    <div class="flex justify-between items-center max-w-screen-lg box-border p-1 m-auto">
+      <app-heading :level="1" :size="'2xl'">
+        <nuxt-link class="flex items-center h-full" to="/">
+          <div class="mr-1">
+            <img class="h-logo" :src="siteLogo.src" :alt="siteLogo.alt">
+          </div>
           ユメタヨリ
-        </app-heading>
-      </nuxt-link>
+        </nuxt-link>
+      </app-heading>
       <div class="sm:block hidden">
         <the-global-nav />
       </div>
