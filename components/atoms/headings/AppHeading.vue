@@ -31,7 +31,8 @@ export default {
       const size = `text-${this.size}`
       return {
         [size]: true,
-        'font-bold': true
+        'font-bold': true,
+        'text-bold': true
       }
     }
   }
