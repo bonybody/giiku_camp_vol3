@@ -2,7 +2,6 @@ const admin = require('firebase-admin')
 const functions = require('firebase-functions')
 const express = require('express')
 const axios = require('axios')
-
 module.exports = function () {
   const router = express.Router()
 
@@ -10,6 +9,10 @@ module.exports = function () {
     const query = req.query
     const accessToken = query.accessToken
     const lineChannelId = functions.config().line.login.channel_id
+    const firestore = admin.firestore()
+    const firestoreUserDefaultParam = {
+      notification: true
+    }
 
     const lineAxios = axios.create({
       baseURL: 'https://api.line.me',
@@ -40,6 +43,12 @@ module.exports = function () {
           Authorization: `Bearer ${accessToken}`
         }
       })
+
+      // firestoreのusersのドキュメントを作成
+      const firestoreUser = firestore.collection('users').doc(userProfile.data.userId)
+      if (!firestoreUser.exists) {
+        await firestoreUser.set(firestoreUserDefaultParam)
+      }
 
       // カスタムトークンの作成
       const customToken = await admin.auth().createCustomToken(userProfile.data.userId)
