@@ -1,11 +1,14 @@
 <template>
   <header class="bg-white shadow-md h-12">
     <div class="flex justify-between h-full items-center max-w-screen-lg box-border p-1 m-auto">
-      <div>
+      <nuxt-link class="flex items-center h-full" to="/">
+        <div class="h-full mr-1">
+          <img class="h-full" :src="siteLogo.src" :alt="siteLogo.alt">
+        </div>
         <app-heading :level="1" :size="'2xl'">
           ユメタヨリ
         </app-heading>
-      </div>
+      </nuxt-link>
       <div class="sm:block hidden">
         <the-global-nav />
       </div>
@@ -35,7 +38,11 @@ export default {
   },
   data () {
     return {
-      activeSmMenu: false
+      activeSmMenu: false,
+      siteLogo: {
+        src: require('@/assets/images/icons/yumetayori-logo.svg'),
+        alt: 'ユメタヨリ'
+      }
     }
   },
   methods: {
