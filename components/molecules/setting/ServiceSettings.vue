@@ -8,7 +8,7 @@
     <!-- settingが増えることを見越してlistで作成 -->
     <!-- <ul><li></li></ul> -->
     <div class="flex mt-4">
-      <app-toggle-button v-model="current" :bool-state="current">
+      <app-toggle-button v-model="current" :is-state="current">
         <div class="text-base mr-4">
           ユメの通知
         </div>
