@@ -28,7 +28,7 @@
     </div>
     <div v-if="type === 'preview'" class="mb-4 flex flex-start justify-end">
       <div class="mr-4">
-        <app-button color="secondary">
+        <app-button color="secondary" @click="changeDialogState">
           ユメを記憶する
         </app-button>
       </div>
@@ -38,16 +38,27 @@
         </app-button>
       </div>
     </div>
+    <transition>
+      <app-dialog
+        v-show="dialog"
+        title="確認"
+        :text="'この内容で投稿します。本当によろしいですか？'"
+        :is-close-action="true"
+        @close-dialog="changeDialogState"
+        @click="send"
+      />
+    </transition>
   </div>
 </template>
 
 <script>
 import AppHeading from '@/components/atoms/headings/AppHeading'
 import AppButton from '@/components/atoms/forms/AppButton'
+import AppDialog from '@/components/molecules/commons/AppDialog'
 
 export default {
   name: 'YumeDetail',
-  components: { AppButton, AppHeading },
+  components: { AppDialog, AppButton, AppHeading },
   props: {
     type: {
       type: String,
@@ -71,6 +82,11 @@ export default {
       require: true
     }
   },
+  data () {
+    return {
+      dialog: false
+    }
+  },
   computed: {
     getTextLineArray () {
       const array = this.text.split('\n')
@@ -88,6 +104,22 @@ export default {
         text: this.text
       }
       this.$router.push({ path: '/yume_tayori', query })
+    },
+    changeDialogState () {
+      this.dialog = !this.dialog
+    },
+    async send () {
+      // パラメータの定義
+      const title = this.title
+      const category = this.category.doc.ref
+      const text = this.text
+      const user = this.$auth.getUser({ doc: true })
+      // ドキュメントの作成
+      const id = await this.$api.yume.addYumeTayori(title, category, text, user)
+      if (id) {
+        // ドキュメントの作成に成功すればユメ詳細画面に遷移
+        this.$router.push('/yume_kioku/' + id)
+      }
     }
   }
 }

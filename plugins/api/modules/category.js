@@ -20,7 +20,6 @@ class Category {
         res.push(data)
       })
     })
-    console.log(res)
     return res
   }
 }

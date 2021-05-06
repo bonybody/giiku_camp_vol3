@@ -30,11 +30,9 @@ export default {
   data () {
     return {
       title: '',
-      category: '',
+      category: {},
       text: '',
-      categoryOptions: [
-        '怖い夢'
-      ]
+      categoryOptions: []
     }
   },
   async fetch () {
@@ -47,6 +45,7 @@ export default {
     try {
       const categories = await this.$api.category.getCategories()
       this.categoryOptions = categories
+      this.category = categories[0]
     } catch (e) {
       console.error(e)
     }

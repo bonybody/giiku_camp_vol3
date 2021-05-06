@@ -47,7 +47,7 @@ export default {
       require: true
     },
     value: {
-      type: [Number, String],
+      type: [Number, String, Object],
       default: null,
       require: true
     },

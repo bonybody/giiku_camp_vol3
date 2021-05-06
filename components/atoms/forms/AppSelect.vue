@@ -19,7 +19,7 @@
     @blur="$emit('blur')"
   >
     <template v-for="option in options">
-      <option :key="option.id" :value="option">
+      <option :key="option.id" :value="option" :selected="true">
         {{ option.text }}
       </option>
     </template>
@@ -42,9 +42,11 @@ export default {
       default: null
     },
     value: {
-      type: [Number, String],
+      type: Object,
       require: true,
-      default: null
+      default () {
+        return {}
+      }
     }
   },
   computed: {
