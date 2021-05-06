@@ -18,6 +18,9 @@ module.exports = {
       width: {
         content: '400px'
       },
+      height: {
+        logo: '36px'
+      },
       maxWidth: {
         content: '400px'
       },
