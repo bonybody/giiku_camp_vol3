@@ -14,12 +14,13 @@ class Category {
 
   async getCategories () {
     const res = []
-    await this.db.get().then((querySnapshot) => {
+    await this.db.collection('category').get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        this.formatter.firestoreDocFormat(doc)
-        res.push()
+        const data = this.formatter.firestoreDocFormat(doc)
+        res.push(data)
       })
-    }
-    )
+    })
+    console.log(res)
+    return res
   }
 }
