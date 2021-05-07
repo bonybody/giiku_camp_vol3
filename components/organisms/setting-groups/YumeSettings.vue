@@ -12,25 +12,29 @@
       </div>
       <template v-for="(previewItem, index) in previewItems">
         <div :key="index" class="mt-4">
-          <preview-item :title="previewItem.title" :is-myself="previewItem.isMyself">
-            <app-button color="red-500" @click="showDialog(index)">
-              記憶を消す
-            </app-button>
+          <preview-item :title="previewItem.title" :is-myself="isMyself(previewItem.type)">
+            <template #title>
+              {{ previewItem.title }}
+            </template>
+            <template #detail>
+              <app-button color="red-500" @click="showDialog(previewItem.type)">
+                記憶を消す
+              </app-button>
+            </template>
           </preview-item>
+          <transition>
+            <app-dialog
+              v-show="isDialog"
+              :is-close-action="true"
+              :title="dialog.title"
+              :text="dialog.text"
+              @click="onDeleteItem(dialog.argument)"
+              @close-dialog="isDialog = false"
+            />
+          </transition>
         </div>
       </template>
     </div>
-
-    <transition>
-      <app-dialog
-        v-show="isDialog"
-        :is-close-action="true"
-        :title="dialog.title"
-        :text="dialog.text"
-        @click="onDeleteItem"
-        @close-dialog="isDialog = false"
-      />
-    </transition>
   </div>
 </template>
 
@@ -52,31 +56,18 @@ export default {
         title: '記憶を消去します',
         text: 'ユメタヨリの記憶を削除すると<br>' +
             'ユメタヨリを受け取った人の記憶も<br>' +
-            '消去されます'
+            '消去されます',
+        argument: null
       },
       previewItems: [
         {
-          isMyself: false,
-          title: 'ユメポスト0',
-          createdAt: '2020/05/05',
+          type: 'yume_tayori',
+          title: 'ユメタヨリ',
           isFavorite: false
         },
         {
-          isMyself: false,
-          title: 'ユメポスト1',
-          createdAt: '2020/05/05',
-          isFavorite: true
-        },
-        {
-          isMyself: true,
-          title: 'ユメタヨリ2',
-          createdAt: '2020/05/05',
-          isFavorite: false
-        },
-        {
-          isMyself: true,
-          title: 'ユメタヨリ3',
-          createdAt: '2020/05/05',
+          type: 'yume_post',
+          title: 'ユメポスト',
           isFavorite: true
         }
       ]
@@ -91,15 +82,31 @@ export default {
       return false
     }
   },
+  computed: {
+    isMyself () {
+      return (type) => {
+        if (type === 'yume_tayori') {
+          return true
+        } else {
+          return false
+        }
+      }
+    }
+  },
   methods: {
-    showDialog (index) {
-      this.selectedItem = index
+    showDialog (argument) {
       this.isDialog = true
+      this.dialog.argument = argument
     },
     // async onDeleteItem () {
-    onDeleteItem () {
-      const newPreviewItems = this.previewItems.filter((el, i, self) => el !== self[this.selectedItem])
-      this.previewItems = newPreviewItems
+    async onDeleteItem (type) {
+      console.log(type)
+      const user = this.$auth.getUser({ doc: true })
+      try {
+        await this.$api.yume.deleteYumeByUserWithType(user, type)
+      } catch (e) {
+        return false
+      }
       this.isDialog = false
     },
     async changeNotificationState () {
@@ -108,15 +115,7 @@ export default {
       this.currentNotification = !isState
       await this.$api.user.editNotificationState(user, !isState)
     }
-
   }
-  // fetch () {
-  /*
-      firestoreの必要なデータ
-        - isMyself: コンテンツの種類を判断
-        - isNotification: 現在のユーザーの通知設定
-    */
-  // }
 }
 </script>
 
