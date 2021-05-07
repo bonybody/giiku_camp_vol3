@@ -11,7 +11,7 @@
 
         <div class="flex sm:mt-6 mt-4 sm:justify-start justify-around">
           <template v-for="(menuIcon, index) in menuIcons">
-            <div class="mr-2" :key="index">
+            <div :key="index" class="mr-2">
               <img class="h-logo" :src="menuIcon.src" :alt="menuIcon.alt">
             </div>
           </template>
