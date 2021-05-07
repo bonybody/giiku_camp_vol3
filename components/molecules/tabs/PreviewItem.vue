@@ -1,14 +1,12 @@
 <template>
   <div class="h-14 flex items-center box-border px-4 border rounded-md">
-    <div class="h-9 mr-3">
-      <img v-if="isMyself === true" class="h-full" :src="yumeTayori.src" :alt="yumeTayori.alt">
+    <div class="h-9 min-w-icon">
+      <img v-if="isMyself === true" class="h-full box-border" :src="yumeTayori.src" :alt="yumeTayori.alt">
       <img v-else class="h-full" :src="yumePost.src" :alt="yumePost.alt">
     </div>
-    <div>
-      <app-heading :level="3" size="lg">
-        <slot name="title" />
-      </app-heading>
-    </div>
+    <h3 class="truncate block w-full pl-3 text-bold font-bold text-lg leading-9">
+      <slot name="title" />
+    </h3>
     <div class="ml-auto">
       <slot name="detail" />
     </div>
@@ -16,10 +14,8 @@
 </template>
 
 <script>
-import AppHeading from '@/components/atoms/headings/AppHeading'
 export default {
   name: 'PreviewItem',
-  components: { AppHeading },
   props: {
     title: {
       type: String,
