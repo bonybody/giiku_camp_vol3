@@ -1,7 +1,7 @@
 <template>
   <div class="w-full box-border p-4 bg-white rounded-b-frame shadow-md">
     <div>
-      <service-settings v-model="notification" :current-notification="notification" />
+      <service-settings :current-notification="currentNotification" @click="changeNotificationState" />
     </div>
     <hr class="w-full my-4">
     <div>
@@ -82,14 +82,13 @@ export default {
       ]
     }
   },
-  computed: {
-    notification: {
-      get () {
-        return this.currentNotification
-      },
-      set (bool) {
-        this.currentNotification = !this.currentNotification
-      }
+  async fetch () {
+    try {
+      const user = this.$auth.getUser({ doc: true })
+      const data = await this.$api.user.getUserSettingByUser(user)
+      this.currentNotification = data.notification
+    } catch (e) {
+      return false
     }
   },
   methods: {
@@ -102,7 +101,14 @@ export default {
       const newPreviewItems = this.previewItems.filter((el, i, self) => el !== self[this.selectedItem])
       this.previewItems = newPreviewItems
       this.isDialog = false
+    },
+    async changeNotificationState () {
+      const isState = this.currentNotification
+      const user = this.$auth.getUser({ doc: true })
+      this.currentNotification = !isState
+      await this.$api.user.editNotificationState(user, !isState)
     }
+
   }
   // fetch () {
   /*

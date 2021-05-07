@@ -8,7 +8,7 @@
     <!-- settingが増えることを見越してlistで作成 -->
     <!-- <ul><li></li></ul> -->
     <div class="flex mt-4">
-      <app-toggle-button v-model="current" :is-state="current">
+      <app-toggle-button :is-state="currentNotification" @click="$emit('click')">
         <div class="text-base mr-4">
           ユメの通知
         </div>
@@ -29,16 +29,6 @@ export default {
       type: Boolean,
       default: null,
       require: true
-    }
-  },
-  computed: {
-    current: {
-      get () {
-        return this.currentNotification
-      },
-      set (bool) {
-        this.$emit('input', bool)
-      }
     }
   }
 }
