@@ -6,11 +6,11 @@
     </div>
     <div>
       <app-heading :level="3" size="lg">
-        {{ title }}
+        <slot name="title" />
       </app-heading>
     </div>
     <div class="ml-auto">
-      <slot />
+      <slot name="detail" />
     </div>
   </div>
 </template>

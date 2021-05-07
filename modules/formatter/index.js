@@ -30,6 +30,6 @@ export default {
 
   // 日付オブジェクト、または日付形式に則った文字列を日本語に変換する
   dateFormatToJapanese (date) {
-    return dayjs(date).format('YYYY年MM月DD日HH時mm分')
+    return dayjs(date).format('YYYY/MM/DD')
   }
 }
