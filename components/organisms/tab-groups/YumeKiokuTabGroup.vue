@@ -5,7 +5,7 @@
     </div>
     <template v-for="(previewItem, index) in previewItems">
       <div :key="index" class="mt-4">
-        <preview-item :title="previewItem.title" :is-myself="previewItem.isMyself">
+        <preview-item :title="previewItem.title" :is-myself="isMyself(previewItem.type)">
           <div class="text-right">
             <button class="w-5 h-5 mb-1 focus:outline-none" @click="changeFavorite(index)">
               <svg
@@ -76,6 +76,10 @@ export default {
       }
     }
   },
+  async fetch () {
+    const user = this.$auth.getUser({ doc: true })
+    this.previewItems = await this.$api.yume.getYumeGroupByUser(user)
+  },
   computed: {
     current: {
       get () {
@@ -84,10 +88,17 @@ export default {
       set (tab) {
         this.currentTab = tab
       }
+    },
+    isMyself () {
+      return (type) => {
+        if (type === 'yume_tayori') {
+          return true
+        } else {
+          return false
+        }
+      }
     }
   },
-  /* yumeのデータを受け取る */
-  // fetch () {}
   methods: {
     // async changeFavorite (index) {
     changeFavorite (index) {
