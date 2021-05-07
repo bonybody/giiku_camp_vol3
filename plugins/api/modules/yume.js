@@ -25,7 +25,27 @@ class Yume {
 
   async getYumeGroupByUser (user) {
     const data = []
-    const actions = await this.db.collection('yume_actions').where('user', '==', user).get()
+    const actions = await this.db.collection('yume_actions').where('user', '==', user).orderBy('isFavorite', 'desc').orderBy('createdAt', 'desc').get()
+    actions.forEach(async (doc) => {
+      const yumeData = await this.formatter.firestoreYumeFormat(doc)
+      data.push(yumeData)
+    })
+    return data
+  }
+
+  async getYumeTayoriGroupByUser (user) {
+    const data = []
+    const actions = await this.db.collection('yume_actions').where('user', '==', user).where('type', '==', 'yume_tayori').orderBy('isFavorite', 'desc').orderBy('createdAt', 'desc').get()
+    actions.forEach(async (doc) => {
+      const yumeData = await this.formatter.firestoreYumeFormat(doc)
+      data.push(yumeData)
+    })
+    return data
+  }
+
+  async getYumePostGroupByUser (user) {
+    const data = []
+    const actions = await this.db.collection('yume_actions').where('user', '==', user).where('type', '==', 'yume_post').orderBy('isFavorite', 'desc').orderBy('createdAt', 'desc').get()
     actions.forEach(async (doc) => {
       const yumeData = await this.formatter.firestoreYumeFormat(doc)
       data.push(yumeData)
