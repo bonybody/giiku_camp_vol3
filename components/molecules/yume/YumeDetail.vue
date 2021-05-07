@@ -1,26 +1,34 @@
 <template>
   <div class="bg-white rounded-frame p-4 border-box">
-    <div class="mb-3">
-      <app-heading :level="3" size="xl">
-        {{ title }}
-      </app-heading>
+    <div class="flex">
+      <div>
+        <div class="mb-3">
+          <app-heading :level="3" size="xl">
+            {{ title }}
+          </app-heading>
+        </div>
+        <div
+          class="
+          mb-3
+          font-bold
+          text-sm
+          inline-block
+          min-w-button
+          text-center
+          leading-9
+          rounded-full
+          bg-opacity-30
+          bg-primary
+          text-primary"
+        >
+          {{ category }}
+        </div>
+      </div>
+      <div class="ml-auto">
+        <img :src="crescentMoon.src" :alt="crescentMoon.alt">
+      </div>
     </div>
-    <div
-      class="
-        mb-3
-        font-bold
-        text-sm
-        inline-block
-        min-w-button
-        text-center
-        leading-9
-        rounded-full
-        bg-opacity-30
-        bg-primary
-        text-primary"
-    >
-      {{ category }}
-    </div>
+
     <div class="mb-4 w-full relative">
       <template v-for="(value, index) in getTextLineArray">
         <span :key="index" class="border-b border-gray-400 w-full inline-block leading-9 h-9">{{ value }}</span>
@@ -67,6 +75,14 @@ export default {
       type: String,
       default: '',
       require: true
+    }
+  },
+  data () {
+    return {
+      crescentMoon: {
+        src: require('@/assets/images/icons/crescent-moon.svg'),
+        alt: 'crescent-moon'
+      }
     }
   },
   computed: {
