@@ -11,7 +11,8 @@
         :title="title"
         :text="text"
         :category="category"
-        @click="isDialog = true"
+        @click="send"
+        @back="backFormTo"
       />
     </div>
 
@@ -68,7 +69,29 @@ export default {
       // await
       this.isDialog = false
       this.$router.push('/')
+    },
+    backFormTo () {
+      const query = {
+        title: this.title,
+        category: this.category,
+        text: this.text
+      }
+      this.$router.push({ path: '/yume_tayori', query })
+    },
+    changeDialogState () {
+      this.dialog = !this.dialog
+    },
+    async send () {
+      // パラメータの定義
+      const title = this.title
+      const category = this.category.doc.ref
+      const text = this.text
+      const user = this.$auth.getUser({ doc: true })
+      // ドキュメントの作成
+      await this.$api.yume.addYumeTayori(title, category, text, user)
+      this.isDialog = !this.isDialog
     }
+
   }
 }
 </script>
