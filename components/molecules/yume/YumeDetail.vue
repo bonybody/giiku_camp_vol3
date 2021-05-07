@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white rounded-frame p-4 border-box">
+  <div class="bg-white rounded-frame p-4 border-box shadow-md">
     <div class="flex">
       <div>
         <div class="mb-3">
@@ -36,12 +36,12 @@
     </div>
     <div v-if="type === 'preview'" class="mb-4 flex flex-start justify-end">
       <div class="mr-4">
-        <app-button color="secondary">
+        <app-button color="secondary" @click="$emit('click')">
           ユメを記憶する
         </app-button>
       </div>
       <div>
-        <app-button @click="backFormTo">
+        <app-button color="gray-400" @click="backFormTo">
           戻る
         </app-button>
       </div>
