@@ -25,6 +25,7 @@ module.exports = {
         content: '400px'
       },
       minWidth: {
+        icon: '36px',
         button: '64px',
         dialog: '240px'
       },
