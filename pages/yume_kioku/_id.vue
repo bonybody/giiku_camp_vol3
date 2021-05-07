@@ -11,7 +11,6 @@ export default {
   async asyncData ({ params, $api }) {
     const yumeId = params.id
     const yume = await $api.yume.getYumeById(yumeId)
-    console.log(yume)
     return yume
   },
   data () {

@@ -48,7 +48,7 @@ module.exports = function () {
       // firestoreのusersのドキュメントを作成
       const firestoreUser = await firestore.collection('users').doc(userProfile.data.userId).get()
       if (!firestoreUser.exists) {
-        await firestoreUser.ref.set(firestoreUserDefaultParam)
+        await firestoreUser.set(firestoreUserDefaultParam)
       }
 
       // カスタムトークンの作成

@@ -2,18 +2,18 @@ import dayjs from 'dayjs'
 
 export default {
   // firestoreのdoc(スナップショット)をフォーマットする
-  firestoreDocFormat (doc) {
+  firestoreSnapFormat (snap) {
     return {
-      doc,
-      id: doc.id,
-      ...doc.data()
+      doc: snap,
+      id: snap.id,
+      ...snap.data()
     }
   },
 
   // firestoreのyume_actionsのdoc(1階層目のみスナップショット)をフォーマットする
-  async firestoreYumeFormat (doc) {
-    const action = this.firestoreDocFormat(doc)
-    const yume = this.firestoreDocFormat(await action.yume.get())
+  async firestoreYumeFormat (snap) {
+    const action = this.firestoreSnapFormat(snap)
+    const yume = this.firestoreSnapFormat(await action.yume.get())
     // パラメータの定義
     const actionId = action.id
     const actionDoc = action.doc
@@ -21,7 +21,7 @@ export default {
     const yumeDoc = yume.doc
     const title = yume.title
     const text = yume.text
-    const category = this.firestoreDocFormat(await yume.category.get())
+    const category = this.firestoreSnapFormat(await yume.category.get())
     const type = action.type
     const isFavorite = action.isFavorite
     const createdAt = action.createdAt.toDate()

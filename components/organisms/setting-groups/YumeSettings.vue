@@ -98,15 +98,10 @@ export default {
       this.isDialog = true
       this.dialog.argument = argument
     },
-    // async onDeleteItem () {
     async onDeleteItem (type) {
-      console.log(type)
       const user = this.$auth.getUser({ doc: true })
-      try {
-        await this.$api.yume.deleteYumeByUserWithType(user, type)
-      } catch (e) {
-        return false
-      }
+      const res = await this.$api.yume.deleteYumeByUserWithType(user, type)
+      if (!res) { return }
       this.isDialog = false
     },
     async changeNotificationState () {

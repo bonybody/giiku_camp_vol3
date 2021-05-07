@@ -1,15 +1,16 @@
 // ファクトリ
-export default function ($fire, Formatter) {
-  const yume = new Yume($fire, Formatter)
+export default function ($fire, Formatter, $axios) {
+  const yume = new Yume($fire, Formatter, $axios)
   return yume
 }
 
 // クラス定義
 class Yume {
-  constructor ($fire, Formatter) {
+  constructor ($fire, Formatter, $axios) {
     this.client = $fire
     this.db = $fire.firestore
     this.formatter = Formatter
+    this.axios = $axios
   }
 
   async getYumeById (id) {
@@ -18,7 +19,6 @@ class Yume {
       const yumeData = await this.formatter.firestoreYumeFormat(yumeActionDoc)
       return yumeData
     } catch (e) {
-      console.error(e)
       return false
     }
   }
@@ -36,6 +36,7 @@ class Yume {
   async getYumeTayoriGroupByUser (user) {
     const data = []
     const actions = await this.db.collection('yume_actions').where('user', '==', user).where('type', '==', 'yume_tayori').orderBy('isFavorite', 'desc').orderBy('createdAt', 'desc').get()
+    console.log(actions.docs[0])
     actions.forEach(async (doc) => {
       const yumeData = await this.formatter.firestoreYumeFormat(doc)
       data.push(yumeData)
@@ -58,9 +59,8 @@ class Yume {
       const res = await this.db.collection('yume_actions').doc(id).update({
         isFavorite: state
       })
-      return res
+      return this.formatter.firestoreSnapFormat(res)
     } catch (e) {
-      console.log(e)
       return false
     }
   }
@@ -86,6 +86,23 @@ class Yume {
       })
       return yumeTayoriDoc.id
     } catch (e) {
+      return false
+    }
+  }
+
+  async addYumePost (userDoc) {
+    try {
+      const res = await this.axios.get('https://asia-northeast1-giiku-camp-vol3.cloudfunctions.net/yumePost')
+      const yumeId = res.data.doc._ref._path.segments[1]
+      const yume = this.db.collection('yume').doc(yumeId)
+      const type = 'yume_post'
+      const user = userDoc
+      const createdAt = new Date()
+      const isFavorite = false
+      const actionDoc = await this.db.collection('yume_actions').add({ type, user, yume, createdAt, isFavorite })
+      user.update({})
+      return actionDoc.id
+    } catch (e) {
       console.error(e)
       return false
     }
@@ -93,16 +110,30 @@ class Yume {
 
   async deleteYumeByUserWithType (user, type) {
     try {
+      const promiseArray = []
       const actions = await this.db.collection('yume_actions').where('user', '==', user).where('type', '==', type).get()
-      actions.forEach(async (doc) => {
+
+      actions.forEach((doc) => {
         if (type === 'yume_tayori') {
-          await doc.data().yume.delete()
+          promiseArray.push(this.deleteYumePostByYume(doc.data().yume))
+          promiseArray.push(doc.data().yume.delete())
         }
-        await doc.ref.delete()
+        promiseArray.push(doc.ref.delete())
       })
+      await Promise.all(promiseArray)
       return true
     } catch (e) {
       return false
     }
+  }
+
+  async deleteYumePostByYume (yume) {
+    const promiseArray = []
+    const actions = await this.db.collection('yume_actions').where('yume', '==', yume).where('type', '==', 'yume_post').get()
+    actions.forEach((doc) => {
+      promiseArray.push(doc.ref.delete())
+    })
+    await Promise.all(promiseArray)
+    return true
   }
 }

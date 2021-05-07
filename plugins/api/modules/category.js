@@ -16,7 +16,7 @@ class Category {
     const res = []
     await this.db.collection('category').get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        const data = this.formatter.firestoreDocFormat(doc)
+        const data = this.formatter.firestoreSnapFormat(doc)
         res.push(data)
       })
     })

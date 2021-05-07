@@ -108,7 +108,9 @@ export default {
     services: {
       auth: true,
       firestore: true,
-      functions: true
+      functions: {
+        location: 'asia-northeast1'
+      }
     }
   }
 }

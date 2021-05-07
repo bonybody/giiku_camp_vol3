@@ -33,8 +33,10 @@ export default {
     }
   },
   methods: {
-    accept () {
-      console.log('hoge')
+    async accept () {
+      const user = this.$auth.getUser({ doc: true })
+      const id = await this.$api.yume.addYumePost(user)
+      return this.$router.push('/yume_kioku/' + id)
     }
   }
 }
