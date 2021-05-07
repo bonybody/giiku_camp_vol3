@@ -2,7 +2,9 @@
   <div class="rounded-frame shadow-md bg-white flex justify-between items-stretch p-4 box-border">
     <div class="rounded-frame mr-4 shadow">
       <app-item-frame :color="color" :radius="true">
-        <img :src="image" :alt="title" class="block relative z-10">
+        <div class="h-full w-full flex justify-center items-center relative z-10">
+          <img :src="image" :alt="title">
+        </div>
       </app-item-frame>
     </div>
     <div class="w-64 flex flex-col">
