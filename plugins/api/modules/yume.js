@@ -33,15 +33,37 @@ class Yume {
     return data
   }
 
+  async editYumeIsFavorite (id, state) {
+    try {
+      const res = await this.db.collection('yume_actions').doc(id).update({
+        isFavorite: state
+      })
+      return res
+    } catch (e) {
+      console.log(e)
+      return false
+    }
+  }
+
   async addYumeTayori (title, category, text, user) {
     const type = 'yume_tayori'
     try {
       const createdAt = new Date()
       const isFavorite = false
       // yumeコレクションのドキュメントを作成
-      const yume = await this.db.collection('yume').add({ title, category, text })
+      const yume = await this.db.collection('yume').add({
+        title,
+        category,
+        text
+      })
       // yume_actionコレクションのドキュメントを作成
-      const yumeTayoriDoc = await this.db.collection('yume_actions').add({ type, user, yume, createdAt, isFavorite })
+      const yumeTayoriDoc = await this.db.collection('yume_actions').add({
+        type,
+        user,
+        yume,
+        createdAt,
+        isFavorite
+      })
       return yumeTayoriDoc.id
     } catch (e) {
       console.error(e)

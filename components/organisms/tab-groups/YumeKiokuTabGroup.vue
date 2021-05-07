@@ -20,7 +20,7 @@
               </svg>
             </button>
             <div class="text-xs text-gray-400">
-              {{ previewItem.createdAt }}
+              {{ getJapaneseDate(previewItem.createdAt) }}
             </div>
           </div>
         </preview-item>
@@ -32,38 +32,14 @@
 <script>
 import TabMenu from '@/components/molecules/tabs/TabMenu'
 import PreviewItem from '@/components/molecules/tabs/PreviewItem'
+import formatter from '@/modules/formatter'
 
 export default {
   name: 'YumeKiokuTabGroup',
   components: { TabMenu, PreviewItem },
   data () {
     return {
-      previewItems: [
-        {
-          isMyself: false,
-          title: 'ユメポスト',
-          createdAt: '2020/05/05',
-          isFavorite: false
-        },
-        {
-          isMyself: false,
-          title: 'ユメポスト',
-          createdAt: '2020/05/05',
-          isFavorite: true
-        },
-        {
-          isMyself: true,
-          title: 'ユメタヨリ',
-          createdAt: '2020/05/05',
-          isFavorite: false
-        },
-        {
-          isMyself: true,
-          title: 'ユメタヨリ',
-          createdAt: '2020/05/05',
-          isFavorite: true
-        }
-      ],
+      previewItems: [],
       currentTab: 0,
       tabs: [
         { id: 0, text: 'スベテ' },
@@ -77,8 +53,12 @@ export default {
     }
   },
   async fetch () {
-    const user = this.$auth.getUser({ doc: true })
-    this.previewItems = await this.$api.yume.getYumeGroupByUser(user)
+    try {
+      const user = this.$auth.getUser({ doc: true })
+      this.previewItems = await this.$api.yume.getYumeGroupByUser(user)
+    } catch (e) {
+      console.error(e)
+    }
   },
   computed: {
     current: {
@@ -97,6 +77,11 @@ export default {
           return false
         }
       }
+    },
+    getJapaneseDate () {
+      return (date) => {
+        return formatter.dateFormatToJapanese(date)
+      }
     }
   },
   methods: {
@@ -104,7 +89,10 @@ export default {
     changeFavorite (index) {
       /* firestoreの処理 */
       // await
-      this.previewItems[index].isFavorite = !this.previewItems[index].isFavorite
+      const item = this.previewItems[index]
+      console.log(item)
+      item.isFavorite = !item.isFavorite
+      this.$api.yume.editYumeIsFavorite(item.actionId, item.isFavorite)
     }
   }
 }
