@@ -6,11 +6,11 @@
       <!-- toggle -->
       <div class="relative">
         <!-- input -->
-        <input id="toggleB" type="checkbox" class="sr-only" @click="$emit('input', isState)">
+        <input id="toggleB" type="checkbox" class="sr-only" @click="$emit('click')">
         <!-- line -->
         <div :class="getLineClasses" class="transition-colors block w-14 h-8 rounded-full" />
         <!-- dot -->
-        <div :class="getDotClasses" class="bg-white absolute top-1 w-6 h-6 rounded-full transition shadow-md" />
+        <div :class="getDotClasses" class="bg-white absolute top-1 left-0 right-0 mx-auto w-6 h-6 rounded-full transition shadow-md" />
       </div>
     </label>
   </div>
@@ -28,7 +28,7 @@ export default {
   },
   data () {
     return {
-      isFirstBool: null
+      isFirstBool: false
     }
   },
   computed: {
@@ -39,25 +39,23 @@ export default {
       }
     },
     getDotClasses () {
-      const firstDotPosition = this.isFirstBool ? 'right' : 'left'
       return {
-        [`${firstDotPosition}-1`]: true,
-        [`dot-${this.isFirstBool}`]: true
+        [`dot-${this.isState}`]: true
       }
     }
   },
-  mounted () {
+  created () {
     this.isFirstBool = this.isState
   }
 }
 </script>
 
 <style scoped>
-input:checked ~ .dot-true {
-  transform: translateX(-100%);
+.dot-true {
+  transform: translateX(50%);
 }
 
-input:checked ~ .dot-false {
-  transform: translateX(100%);
+.dot-false {
+  transform: translateX(-50%);
 }
 </style>

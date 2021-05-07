@@ -45,7 +45,7 @@ module.exports = function () {
       })
 
       // firestoreのusersのドキュメントを作成
-      const firestoreUser = firestore.collection('users').doc(userProfile.data.userId)
+      const firestoreUser = await firestore.collection('users').doc(userProfile.data.userId).get()
       if (!firestoreUser.exists) {
         await firestoreUser.set(firestoreUserDefaultParam)
       }
