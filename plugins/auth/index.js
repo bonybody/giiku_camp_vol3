@@ -19,8 +19,14 @@ class Auth {
     window.location.href = process.env.clientUrl + '/'
   }
 
-  getUser () {
-    return this.fire.auth.currentUser
+  getUser ({ doc }) {
+    const user = this.fire.auth.currentUser
+    const userId = user.uid
+    if (doc) {
+      return this.fire.firestore.collection('users').doc(userId)
+    } else {
+      return user
+    }
   }
 
   loggedIn () {

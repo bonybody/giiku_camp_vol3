@@ -9,4 +9,13 @@
   button {
     @apply focus:outline-none;
   }
+
+  .v-enter-active, .v-leave-active {
+    transition: opacity 150ms
+  }
+
+  .v-enter, .v-leave-to {
+    opacity: 0
+  }
+
 }

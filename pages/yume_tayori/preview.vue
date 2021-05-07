@@ -29,20 +29,22 @@
 </template>
 
 <script>
-import YumeDetail from '@/components/molecules/yume/YumeDetail'
+import YumeDetail from '@/components/organisms/yume/YumeDetail'
 import AppHeading from '@/components/atoms/headings/AppHeading'
 import AppDialog from '@/components/molecules/commons/AppDialog'
 
 export default {
   components: { AppHeading, YumeDetail, AppDialog },
   asyncData ({ query }) {
-    const title = query.title
-    const text = query.text
-    const category = query.category
-    return {
-      title,
-      text,
-      category
+    if (query) {
+      const title = query.title
+      const text = query.text
+      const category = query.category
+      return {
+        title,
+        text,
+        category
+      }
     }
   },
   data () {

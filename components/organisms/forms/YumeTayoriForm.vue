@@ -30,19 +30,24 @@ export default {
   data () {
     return {
       title: '',
-      category: '',
+      category: {},
       text: '',
-      categoryOptions: [
-        '怖い夢'
-      ]
+      categoryOptions: []
     }
   },
-  fetch () {
+  async fetch () {
     if (this.$route.query.title) {
       const params = this.$route.query
       this.title = params.title
       this.category = params.category
       this.text = params.text
+    }
+    try {
+      const categories = await this.$api.category.getCategories()
+      this.categoryOptions = categories
+      this.category = categories[0]
+    } catch (e) {
+      console.error(e)
     }
   },
   methods: {
