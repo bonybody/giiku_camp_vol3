@@ -3,7 +3,7 @@
     <div class="min-w-dialog p-4 bg-white rounded-frame shadow-md">
       <div>
         <app-heading :level="3" size="xl">
-          <span class="text-primary">
+          <span :class="`text-${color}`">
             {{ title }}
           </span>
         </app-heading>
@@ -12,7 +12,7 @@
       <div class="text-sm mt-2 text-gray-400" v-html="text" />
       <div class="flex w-full mt-4">
         <div class="ml-auto">
-          <app-button color="primary" @click="$emit('click')">
+          <app-button :color="color" @click="$emit('click')">
             確認
           </app-button>
         </div>
@@ -47,6 +47,10 @@ export default {
       type: String,
       default: null,
       require: true
+    },
+    color: {
+      type: String,
+      default: 'primary'
     }
   }
 }
