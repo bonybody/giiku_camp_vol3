@@ -1,5 +1,5 @@
 <template>
-  <div class="container max-w-md m-auto">
+  <div class="container max-w-content m-auto">
     <the-top-visual />
     <div class="mt-6">
       <top-detail-menu-group />
