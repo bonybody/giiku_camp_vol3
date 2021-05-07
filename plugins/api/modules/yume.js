@@ -90,4 +90,19 @@ class Yume {
       return false
     }
   }
+
+  async deleteYumeByUserWithType (user, type) {
+    try {
+      const actions = await this.db.collection('yume_actions').where('user', '==', user).where('type', '==', type).get()
+      actions.forEach(async (doc) => {
+        if (type === 'yume_tayori') {
+          await doc.data().yume.delete()
+        }
+        await doc.ref.delete()
+      })
+      return true
+    } catch (e) {
+      return false
+    }
+  }
 }
