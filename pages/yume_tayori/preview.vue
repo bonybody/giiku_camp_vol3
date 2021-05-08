@@ -63,10 +63,7 @@ export default {
     }
   },
   methods: {
-    // async toTopAfterSending () {
     toTopAfterSending () {
-      /* 夢をfirestore送信  */
-      // await
       this.isDialog = false
       this.$router.push('/')
     },
@@ -76,6 +73,7 @@ export default {
         category: this.category,
         text: this.text
       }
+      console.log(this.text.length)
       this.$router.push({ path: '/yume_tayori', query })
     },
     changeDialogState () {
