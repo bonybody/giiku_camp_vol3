@@ -1,12 +1,13 @@
 <template>
   <div>
     <div class="mb-1">
-      <app-form-label :for="name" :focus="focusState" :text="label" />
+      <app-form-label :for="name" :focus="focusState" :text="label" :is-state="isState" />
     </div>
     <div>
       <app-text-area
         v-if="type === 'textarea'"
         v-model="inputValue"
+        :is-state="isState"
         :name="name"
         @focus="focus"
         @blur="blur"
@@ -24,6 +25,7 @@
         v-else
         v-model="inputValue"
         :name="name"
+        :is-state="isState"
         :type="type"
         @focus="focus"
         @blur="blur"
@@ -67,6 +69,10 @@ export default {
         return []
       },
       require: false
+    },
+    isState: {
+      type: Boolean,
+      default: null
     }
   },
   data () {
