@@ -29,10 +29,8 @@
       </div>
     </div>
 
-    <div class="mb-4 w-full relative">
-      <template v-for="(value, index) in getTextLineArray">
-        <span :key="index" class="border-b border-gray-400 w-full inline-block leading-9 h-9">{{ value }}</span>
-      </template>
+    <div class="mb-4 w-full relative line-image break-all" :style="{'background-image': `url(${underline})`}">
+      <span class="w-full inline-block leading-9" v-html="getTextLineArray" />
     </div>
     <div v-if="type === 'preview'" class="mb-4 flex flex-start justify-end">
       <div class="mr-4">
@@ -85,28 +83,25 @@ export default {
       crescentMoon: {
         src: require('@/assets/images/icons/crescent-moon.svg'),
         alt: 'crescent-moon'
-      }
+      },
+      underline: require('@/assets/images/icons/underline.png')
     }
   },
   computed: {
     getTextLineArray () {
-      const array = this.text.split('\n')
-      // const limit = 20
-      // console.log(array)
-      // array.forEach((val, index, arr)=> {
-      //   if (val.length > limit) {
-      //     arr.splice(index ,0 , val.substr(val.length - limit + 1))
-      //   }
-      // })
-      while (array.length < 4) {
-        array.push(null)
-      }
-      return array
+      const text = this.text.replace(/\n/g, '<br>')
+      return text
     }
   }
 }
 </script>
 
 <style scoped>
-
+.over {
+  overflow-wrap: wrap;
+}
+.line-image {
+  height: 100%;
+  background-repeat: repeat-y;
+}
 </style>
