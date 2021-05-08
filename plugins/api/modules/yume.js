@@ -24,34 +24,43 @@ class Yume {
   }
 
   async getYumeGroupByUser (user) {
-    const data = []
     const actions = await this.db.collection('yume_actions').where('user', '==', user).orderBy('isFavorite', 'desc').orderBy('createdAt', 'desc').get()
-    actions.forEach(async (doc) => {
+    const data = await Promise.all(actions.docs.map(async (doc) => {
       const yumeData = await this.formatter.firestoreYumeFormat(doc)
-      data.push(yumeData)
-    })
-    return data
+      return yumeData
+    }))
+    console.log(data)
+    if (data.length === 0) {
+      return false
+    } else {
+      return data
+    }
   }
 
   async getYumeTayoriGroupByUser (user) {
-    const data = []
     const actions = await this.db.collection('yume_actions').where('user', '==', user).where('type', '==', 'yume_tayori').orderBy('isFavorite', 'desc').orderBy('createdAt', 'desc').get()
-    console.log(actions.docs[0])
-    actions.forEach(async (doc) => {
+    const data = await Promise.all(actions.docs.map(async (doc) => {
       const yumeData = await this.formatter.firestoreYumeFormat(doc)
-      data.push(yumeData)
-    })
-    return data
+      return yumeData
+    }))
+    if (data.length === 0) {
+      return false
+    } else {
+      return data
+    }
   }
 
   async getYumePostGroupByUser (user) {
-    const data = []
     const actions = await this.db.collection('yume_actions').where('user', '==', user).where('type', '==', 'yume_post').orderBy('isFavorite', 'desc').orderBy('createdAt', 'desc').get()
-    actions.forEach(async (doc) => {
+    const data = await Promise.all(actions.docs.map(async (doc) => {
       const yumeData = await this.formatter.firestoreYumeFormat(doc)
-      data.push(yumeData)
-    })
-    return data
+      return yumeData
+    }))
+    if (data.length === 0) {
+      return false
+    } else {
+      return data
+    }
   }
 
   async editYumeIsFavorite (id, state) {
