@@ -3,6 +3,7 @@
     v-model="inputValue"
     :name="name"
     rows="5"
+    placeholder="400文字まで入力できます"
     class="
     inline-block
     w-full
