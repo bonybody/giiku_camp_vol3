@@ -10,7 +10,7 @@ module.exports = {
       'nuxt.config.js'
     ],
     options: {
-      safelist: [/^bg-/, /^hover:bg-/, /^text-/, /^hover:text-/]
+      safelist: [/^bg-/, /^hover:bg-/, /^text-/, /^hover:text-/, /^rounded-t-/]
     }
   },
   darkMode: false, // or 'media' or 'class'
