@@ -1,5 +1,6 @@
 import path from 'path'
 import fs from 'fs'
+const isDev = process.env.NODE_ENV === 'development'
 
 export default {
   env: {
@@ -7,12 +8,14 @@ export default {
     functionsUrl: process.env.FUNCTIONS_URL
   },
 
-  server: {
-    https: {
-      key: fs.readFileSync(path.resolve(__dirname, 'localhost-key.pem')),
-      cert: fs.readFileSync(path.resolve(__dirname, 'localhost.pem'))
-    }
-  },
+  server: isDev
+    ? {
+        https: {
+          key: fs.readFileSync(path.resolve(__dirname, 'localhost-key.pem')),
+          cert: fs.readFileSync(path.resolve(__dirname, 'localhost.pem'))
+        }
+      }
+    : false,
 
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
