@@ -47,7 +47,10 @@ module.exports = function () {
     const columns = await Promise.all(yumeActions.docs.map(async (snap) => {
       const yume = await snap.data().yume.get()
       const category = await yume.data().category.get()
-      return createYumeColumn(yume.data().title, category.data().text, siteUrl + '/yume_kioku/' + snap.id)
+      const image = snap.data().type === 'yume_tayori'
+        ? 'https://giiku-camp-vol3.vercel.app/yume-tayori.png'
+        : 'https://giiku-camp-vol3.vercel.app/yume-post.png'
+      return createYumeColumn(yume.data().title, category.data().text, siteUrl + '/yume_kioku/' + snap.id, image)
     }))
     if (columns.length === 0) {
       return true
@@ -66,8 +69,9 @@ module.exports = function () {
     )
   }
 
-  function createYumeColumn (title, text, url) {
+  function createYumeColumn (title, text, url, image) {
     return {
+      thumbnailImageUrl: image,
       imageBackgroundColor: '#FFFFFF',
       title,
       text,
