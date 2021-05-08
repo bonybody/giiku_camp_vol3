@@ -1,15 +1,13 @@
 <template>
-  <div class="h-14 flex items-center box-border px-4 border rounded-md">
-    <div class="h-9 min-w-icon">
-      <img v-if="isMyself === true" class="h-full box-border" :src="yumeTayori.src" :alt="yumeTayori.alt">
-      <img v-else class="h-full" :src="yumePost.src" :alt="yumePost.alt">
+  <div class="h-full flex items-center sm:px-4 px-2 py-2 border rounded-md">
+    <div class="h-9 mr-3">
+      <img v-if="isMyself === true" class="h-full min-w-icon" :src="yumeTayori.src" :alt="yumeTayori.alt">
+      <img v-else class="h-full min-w-icon" :src="yumePost.src" :alt="yumePost.alt">
     </div>
-    <h3 class="truncate block w-full pl-3 text-bold font-bold text-lg leading-9">
+    <h3 class="truncate w-full text-bold font-bold text-lg">
       <slot name="title" />
     </h3>
-    <div class="ml-auto">
-      <slot name="detail" />
-    </div>
+    <slot name="detail" />
   </div>
 </template>
 
