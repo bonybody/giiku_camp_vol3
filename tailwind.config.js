@@ -8,10 +8,12 @@ module.exports = {
       'pages/**/*.vue',
       'plugins/**/*.js',
       'nuxt.config.js'
-    ]
+    ],
+    options: {
+      safelist: [/^bg-/, /^hover:bg-/, /^text-/, /^hover:text-/]
+    }
   },
   darkMode: false, // or 'media' or 'class'
-
   // 予め定義しておきたいutilities
   theme: {
     extend: {
