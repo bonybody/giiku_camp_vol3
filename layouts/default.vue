@@ -11,6 +11,7 @@
 import TheHeader from '@/components/organisms/commons/TheHeader'
 
 export default {
-  components: { TheHeader }
+  components: { TheHeader },
+  middleware: 'auth'
 }
 </script>
