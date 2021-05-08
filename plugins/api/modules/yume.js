@@ -100,7 +100,7 @@ class Yume {
       const createdAt = new Date()
       const isFavorite = false
       const actionDoc = await this.db.collection('yume_actions').add({ type, user, yume, createdAt, isFavorite })
-      user.update({})
+      user.update({ can_accept_yume_post: false })
       return actionDoc.id
     } catch (e) {
       console.error(e)
