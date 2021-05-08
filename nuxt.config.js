@@ -89,7 +89,29 @@ export default {
   axios: {},
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    extractCSS: true,
+    optimization: {
+      splitChunks: {
+        cacheGroups: {
+          // globalスタイル
+          styles: {
+            name: 'styles',
+            test: /\.(css|scss)$/,
+            chunks: 'initial',
+            enforce: true
+          },
+          // components配下のスタイル
+          components: {
+            name: 'components',
+            test: /app\/components/,
+            chunks: 'all',
+            enforce: true
+          }
+        }
+      }
+    }
+  },
 
   babel: {
     plugins: [
