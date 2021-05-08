@@ -11,15 +11,17 @@
         </app-heading>
       </div>
       <template v-for="(previewItem, index) in previewItems">
-        <div :key="index" class="mt-4">
+        <div :key="index" class="mt-4 w-full">
           <preview-item :title="previewItem.title" :is-myself="isMyself(previewItem.type)">
             <template #title>
               {{ previewItem.title }}
             </template>
             <template #detail>
-              <app-button color="red-500" @click="showDialog(previewItem.type)">
-                記憶を消す
-              </app-button>
+              <div class="flex justify-end w-full">
+                <app-button color="red-500" @click="showDialog(previewItem.type)">
+                  記憶を消す
+                </app-button>
+              </div>
             </template>
           </preview-item>
           <transition>
