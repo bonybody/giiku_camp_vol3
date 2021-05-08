@@ -10,6 +10,7 @@
         <div
           class="
           mb-3
+          px-2
           font-bold
           text-sm
           inline-block
