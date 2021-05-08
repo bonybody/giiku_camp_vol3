@@ -8,8 +8,8 @@
         <app-loading-animation />
       </div>
       <div v-show="show">
-        <div v-show="isEmpty">
-          hoge
+        <div v-show="isEmpty" class="mt-4">
+          <the-null-item :current-tab="current" />
         </div>
         <template v-for="(previewItem, index) in previewItems">
           <div :key="index" class="mt-4">
@@ -49,12 +49,13 @@
 <script>
 import TabMenu from '@/components/molecules/tabs/TabMenu'
 import PreviewItem from '@/components/molecules/tabs/PreviewItem'
+import TheNullItem from '@/components/molecules/null-item/TheNullItem'
 import formatter from '@/modules/formatter'
 import AppLoadingAnimation from '@/components/atoms/loading/AppLoadingAnimation'
 
 export default {
   name: 'YumeKiokuTabGroup',
-  components: { AppLoadingAnimation, TabMenu, PreviewItem },
+  components: { AppLoadingAnimation, TabMenu, PreviewItem, TheNullItem },
   data () {
     return {
       previewItems: [],
