@@ -73,7 +73,6 @@ export default {
         category: this.category,
         text: this.text
       }
-      console.log(this.text.length)
       this.$router.push({ path: '/yume_tayori', query })
     },
     changeDialogState () {
