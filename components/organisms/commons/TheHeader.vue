@@ -1,6 +1,6 @@
 <template>
   <header class="bg-white shadow-md h-12">
-    <div class="flex justify-between items-center max-w-screen-lg box-border p-1 m-auto">
+    <div class="flex h-full justify-between items-center max-w-screen-lg box-border p-1 m-auto">
       <app-heading :level="1" :size="'2xl'">
         <nuxt-link class="flex items-center h-full" to="/">
           <div class="mr-1">
