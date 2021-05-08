@@ -91,6 +91,13 @@ export default {
   computed: {
     getTextLineArray () {
       const array = this.text.split('\n')
+      // const limit = 20
+      // console.log(array)
+      // array.forEach((val, index, arr)=> {
+      //   if (val.length > limit) {
+      //     arr.splice(index ,0 , val.substr(val.length - limit + 1))
+      //   }
+      // })
       while (array.length < 4) {
         array.push(null)
       }
