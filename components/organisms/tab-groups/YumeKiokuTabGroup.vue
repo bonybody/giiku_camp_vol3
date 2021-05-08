@@ -3,6 +3,9 @@
     <div>
       <tab-menu v-model="current" :tabs="tabs" :current-tab="current" />
     </div>
+    <div v-show="loading" class="flex justify-center items-center my-4">
+      <app-loading-animation />
+    </div>
     <template v-for="(previewItem, index) in previewItems">
       <div :key="index" class="mt-4">
         <preview-item :is-myself="isMyself(previewItem.type)">
@@ -40,10 +43,11 @@
 import TabMenu from '@/components/molecules/tabs/TabMenu'
 import PreviewItem from '@/components/molecules/tabs/PreviewItem'
 import formatter from '@/modules/formatter'
+import AppLoadingAnimation from '@/components/atoms/loading/AppLoadingAnimation'
 
 export default {
   name: 'YumeKiokuTabGroup',
-  components: { TabMenu, PreviewItem },
+  components: { AppLoadingAnimation, TabMenu, PreviewItem },
   data () {
     return {
       previewItems: [],
@@ -56,23 +60,28 @@ export default {
       pin: {
         src: require('@/assets/images/menu_icons/pin.svg'),
         alt: 'ピン'
-      }
+      },
+      loading: false
     }
   },
   async fetch () {
+    this.loading = true
+    let data = []
     try {
       const user = this.$auth.getUser({ doc: true })
       switch (this.currentTab) {
         case 0:
-          this.previewItems = await this.$api.yume.getYumeGroupByUser(user)
+          data = await this.$api.yume.getYumeGroupByUser(user)
           break
         case 1:
-          this.previewItems = await this.$api.yume.getYumePostGroupByUser(user)
+          data = await this.$api.yume.getYumePostGroupByUser(user)
           break
         case 2:
-          this.previewItems = await this.$api.yume.getYumeTayoriGroupByUser(user)
+          data = await this.$api.yume.getYumeTayoriGroupByUser(user)
           break
       }
+      this.loading = false
+      this.previewItems = data
     } catch (e) {
       console.error(e)
     }
