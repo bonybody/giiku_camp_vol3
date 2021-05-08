@@ -1,42 +1,48 @@
 <template>
-  <div class="w-full box-border p-4 bg-white rounded-b-frame shadow-md">
-    <div>
-      <service-settings :current-notification="currentNotification" @click="changeNotificationState" />
+  <div class="w-full box-border p-4 bg-white rounded-b-frame shadow-md min-h-content" :class="{'flex-center': !show}">
+    <div v-show="!show">
+      <app-loading-animation />
     </div>
-    <hr class="w-full my-4">
-    <div>
+    <div v-show="show">
       <div>
-        <app-heading :level="3" size="xl">
-          ユメの管理
-        </app-heading>
+        <service-settings :current-notification="currentNotification" @click="changeNotificationState" />
       </div>
-      <template v-for="(previewItem, index) in previewItems">
-        <div :key="index" class="mt-4 w-full">
-          <preview-item :title="previewItem.title" :is-myself="isMyself(previewItem.type)">
-            <template #title>
-              {{ previewItem.title }}
-            </template>
-            <template #detail>
-              <div class="flex justify-end w-full">
-                <app-button color="red-500" @click="showDialog(previewItem.type)">
-                  記憶を消す
-                </app-button>
-              </div>
-            </template>
-          </preview-item>
-          <transition>
-            <app-dialog
-              v-show="isDialog"
-              :is-close-action="true"
-              :title="dialog.title"
-              :text="dialog.text"
-              @click="onDeleteItem(dialog.argument)"
-              @close-dialog="isDialog = false"
-            />
-          </transition>
+      <hr class="w-full my-4">
+      <div>
+        <div>
+          <app-heading :level="3" size="xl">
+            ユメの管理
+          </app-heading>
         </div>
-      </template>
+        <template v-for="(previewItem, index) in previewItems">
+          <div :key="index" class="mt-4 w-full">
+            <preview-item :title="previewItem.title" :is-myself="isMyself(previewItem.type)">
+              <template #title>
+                {{ previewItem.title }}
+              </template>
+              <template #detail>
+                <div class="flex justify-end w-full">
+                  <app-button color="red-500" @click="showDialog(previewItem.type)">
+                    記憶を消す
+                  </app-button>
+                </div>
+              </template>
+            </preview-item>
+            <transition>
+              <app-dialog
+                v-show="isDialog"
+                :is-close-action="true"
+                :title="dialog.title"
+                :text="dialog.text"
+                @click="onDeleteItem(dialog.argument)"
+                @close-dialog="isDialog = false"
+              />
+            </transition>
+          </div>
+        </template>
+      </div>
     </div>
+  </div>
   </div>
 </template>
 
@@ -46,11 +52,13 @@ import PreviewItem from '@/components/molecules/tabs/PreviewItem'
 import AppButton from '@/components/atoms/forms/AppButton'
 import AppHeading from '@/components/atoms/headings/AppHeading'
 import AppDialog from '@/components/molecules/commons/AppDialog'
+import AppLoadingAnimation from '@/components/atoms/loading/AppLoadingAnimation'
 
 export default {
-  components: { ServiceSettings, PreviewItem, AppButton, AppHeading, AppDialog },
+  components: { AppLoadingAnimation, ServiceSettings, PreviewItem, AppButton, AppHeading, AppDialog },
   data () {
     return {
+      show: false,
       currentNotification: false,
       selectedItem: null,
       isDialog: false,
@@ -80,6 +88,7 @@ export default {
       const user = this.$auth.getUser({ doc: true })
       const data = await this.$api.user.getUserSettingByUser(user)
       this.currentNotification = data.notification
+      this.show = true
     } catch (e) {
       return false
     }
