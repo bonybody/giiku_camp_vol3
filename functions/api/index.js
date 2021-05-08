@@ -9,6 +9,7 @@ module.exports = function () {
   })
 
   express.use(require('./customToken')())
+  express.use(require('./webhook')())
 
   return functions.region('asia-northeast1').https.onRequest(express)
 }
