@@ -7,7 +7,7 @@
     <div class="flex justify-around mt-6">
       <template v-for="(nullItem, index) in nullItemContent">
         <div :key="index" class="flex flex-col justify-center">
-          <div class="w-1/2 mx-auto">
+          <div class="w-1/2 mx-auto mb-1">
             <img :src="nullItem.src" :alt="nullItem.alt">
           </div>
           <app-button :to="nullItem.link.to" :color="nullItem.color">

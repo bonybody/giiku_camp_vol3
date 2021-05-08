@@ -1,13 +1,16 @@
 <template>
   <form class="bg-white rounded-b-frame shadow-md p-4 box-border" @submit.prevent="formSubmit">
+    <div v-if="isTitle || isText" class="font-bold text-red-500 text-sm mb-4">
+      入力に誤りがあります
+    </div>
     <div class="mb-4">
-      <default-input-item v-model="title" name="title" label="ユメの題名" />
+      <default-input-item v-model="title" :is-state="isTitle" name="title" label="ユメの題名" />
     </div>
     <div class="mb-4">
       <default-input-item v-model="category" name="category" label="ユメの種類" type="select" :options="categoryOptions" />
     </div>
     <div class="mb-4">
-      <default-input-item v-model="text" name="text" label="ユメの内容" type="textarea" />
+      <default-input-item v-model="text" :is-state="isText" name="text" label="ユメの内容" type="textarea" />
     </div>
     <div class="text-right">
       <app-button color="secondary">
@@ -32,7 +35,9 @@ export default {
       title: '',
       category: {},
       text: '',
-      categoryOptions: []
+      categoryOptions: [],
+      isTitle: null,
+      isText: null
     }
   },
   async fetch () {
@@ -57,7 +62,19 @@ export default {
         category: this.category,
         text: this.text
       }
-      this.$router.push({ path: '/yume_tayori/preview', query })
+      this.checkInputForm('title')
+      this.checkInputForm('text')
+      if (this.isTitle !== true && this.isText !== true) {
+        this.$router.push({ path: '/yume_tayori/preview', query })
+      }
+    },
+    checkInputForm (value) {
+      const type = value[0].toUpperCase() + value.slice(1)
+      if (this[value].length === 0) {
+        this[`is${type}`] = true
+      } else {
+        this[`is${type}`] = false
+      }
     }
   }
 }

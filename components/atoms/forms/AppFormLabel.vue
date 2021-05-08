@@ -1,6 +1,6 @@
 <template>
   <label
-    :class="{'text-slim': !focus, 'text-secondary': focus}"
+    :class="[{focus: 'text-secondary'}, isState ? 'text-red-500' : 'text-slim']"
     class="transition-colors text-sm font-bold"
     :for="getFor"
   >
@@ -25,6 +25,10 @@ export default {
       type: String,
       default: null,
       require: true
+    },
+    isState: {
+      type: Boolean,
+      default: null
     }
   },
   computed: {
