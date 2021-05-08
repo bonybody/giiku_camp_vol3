@@ -24,19 +24,19 @@ export default {
       menus: [
         {
           text: 'ユメポスト',
-          to: 'yume_post'
+          to: '/yume_post'
         },
         {
           text: 'ユメタヨリ',
-          to: 'yume_tayori'
+          to: '/yume_tayori'
         },
         {
           text: 'ユメの記憶',
-          to: 'yume_kioku'
+          to: '/yume_kioku'
         },
         {
           text: '設定',
-          to: 'setting'
+          to: '/setting'
         }
       ]
     }

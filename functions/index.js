@@ -1,8 +1,10 @@
 const admin = require('firebase-admin')
-const api = require('./api')
-
 admin.initializeApp()
-
+const api = require('./api')
+const yumePost = require('./yumePost')
+const schedulerJobs = require('./schedulerJobs/index')
 module.exports = {
-  api: api()
+  api: api(),
+  yumePost,
+  ...schedulerJobs
 }

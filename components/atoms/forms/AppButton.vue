@@ -10,6 +10,7 @@
     v-else
     :class="getClasses"
     :to="to"
+    @click="$emit('click')"
   >
     <slot />
   </nuxt-link>
@@ -28,21 +29,36 @@ export default {
       default () {
         return null
       }
+    },
+    variable: {
+      type: Boolean,
+      default: false
+    },
+    left: {
+      type: Boolean,
+      default: false
+    },
+    bgPaint: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
     getClasses () {
-      const textColor = `text-${this.color}`
+      const textColor = this.bgPaint ? 'text-white' : `text-${this.color}`
       const bgColor = `bg-${this.color}`
       const hover = {
         [`hover:${bgColor}`]: true
       }
       return {
         [textColor]: true,
+        [bgColor]: this.bgPaint,
         'inline-block': true,
-        'text-center': true,
         'px-3': true,
         'leading-9': true,
+        'w-full': this.variable,
+        'text-left': this.left,
+        'text-center': !this.left,
         'min-w-button': true,
         'hover:bg-opacity-30': true,
         rounded: true,

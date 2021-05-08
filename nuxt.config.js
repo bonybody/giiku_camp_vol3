@@ -22,7 +22,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'giiku_camp_vol3',
+    title: 'ユメタヨリ',
     htmlAttrs: {
       lang: 'en'
     },
@@ -41,21 +41,22 @@ export default {
     link: [
       {
         rel: 'icon',
-        type: 'image/x-icon',
-        href: '/favicon.ico'
+        type: 'image/svg+xml',
+        href: '/favicon.svg'
       }
     ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    '@/assets/index.scss'
+    '@/assets/css/index.scss'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '@/plugins/client-init',
-    '@/plugins/auth'
+    '@/plugins/auth',
+    '@/plugins/api'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -107,7 +108,9 @@ export default {
     services: {
       auth: true,
       firestore: true,
-      functions: true
+      functions: {
+        location: 'asia-northeast1'
+      }
     }
   }
 }

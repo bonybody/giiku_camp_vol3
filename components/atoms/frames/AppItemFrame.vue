@@ -1,7 +1,7 @@
 <template>
   <div :class="rootClasses" class="p-4 h-full box-border relative flex justify-center items-center">
     <div :class="groundClasses" class="z-10 absolute sm:bottom-0 bottom-2 w-full h-1/4 bg-opacity-30 rounded-1/2 sm:rounded-t-1/2 sm:rounded-b-none" aria-label="ground" />
-    <div class="z-20">
+    <div class="h-full w-full z-20">
       <slot />
     </div>
   </div>
