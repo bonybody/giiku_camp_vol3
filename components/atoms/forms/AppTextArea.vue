@@ -3,14 +3,15 @@
     v-model="inputValue"
     :name="name"
     rows="5"
+    maxlength="400"
     placeholder="400文字まで入力できます"
+    :class="[isState ? 'border-red-500' : 'border-gray-300']"
     class="
     inline-block
     w-full
     rounded
     bg-white
     border
-    border-gray-300
     p-1
     box-border
     text-base
@@ -32,6 +33,10 @@ export default {
     value: {
       type: [Number, String],
       require: true,
+      default: null
+    },
+    isState: {
+      type: Boolean,
       default: null
     }
   },
