@@ -8,8 +8,8 @@
           </span>
         </app-heading>
       </div>
-
-      <div class="text-sm mt-2 text-gray-400" v-html="text" />
+      <!-- eslint-disable-next-line -->
+      <div class="text-sm mt-2 text-gray-400" v-html="sanitize(text)" />
       <div class="flex w-full mt-4">
         <div class="ml-auto">
           <app-button :color="color" @click="$emit('click')">
@@ -29,6 +29,7 @@
 <script>
 import AppButton from '@/components/atoms/forms/AppButton'
 import AppHeading from '@/components/atoms/headings/AppHeading'
+import sanitizeHTML from 'sanitize-html'
 
 export default {
   name: 'AppDialog',
@@ -51,6 +52,11 @@ export default {
     color: {
       type: String,
       default: 'primary'
+    }
+  },
+  methods: {
+    sanitize (text) {
+      return sanitizeHTML(text)
     }
   }
 }
