@@ -13,7 +13,8 @@
           {{ title }}
         </app-heading>
       </div>
-      <p class="text-sm text-gray-400" v-html="text" />
+      <!-- eslint-disable-next-line -->
+      <p class="text-sm text-gray-400" v-html="sanitize(text)" />
       <div class="text-right mt-auto" :class="{[thisColor]: true}">
         <app-button :to="link.to" :color="color">
           {{ link.text }}
@@ -27,6 +28,7 @@
 import AppHeading from '@/components/atoms/headings/AppHeading'
 import AppButton from '@/components/atoms/forms/AppButton'
 import AppItemFrame from '@/components/atoms/frames/AppItemFrame'
+import sanitizeHTML from 'sanitize-html'
 export default {
   name: 'DetailMenu',
   components: { AppItemFrame, AppButton, AppHeading },
@@ -60,6 +62,11 @@ export default {
   computed: {
     thisColor () {
       return `text-${this.color}`
+    }
+  },
+  methods: {
+    sanitize (text) {
+      return sanitizeHTML(text)
     }
   }
 }
