@@ -1,7 +1,7 @@
 <template>
   <div class="w-full rounded-frame shadow-md">
     <app-item-frame color="white" ground-color="primary">
-      <div class="w-full box-border px-2 pt-2">
+      <div class="w-full box-border sm:px-2 px-0 sm:pt-2 pt-0">
         <app-heading :level="2" size="2xl">
           ユメタヨリ
         </app-heading>

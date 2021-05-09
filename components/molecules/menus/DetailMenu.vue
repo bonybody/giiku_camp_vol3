@@ -8,13 +8,13 @@
       </app-item-frame>
     </div>
     <div class="w-64 flex flex-col">
-      <div class="mb-3">
+      <div class="mb-2">
         <app-heading :level="2" size="xl">
           {{ title }}
         </app-heading>
       </div>
       <!-- eslint-disable-next-line -->
-      <p class="text-sm text-gray-400" v-html="sanitize(text)" />
+      <p class="mb-1 text-sm text-gray-400" v-html="sanitize(text)" />
       <div class="text-right mt-auto" :class="{[thisColor]: true}">
         <app-button :to="link.to" :color="color">
           {{ link.text }}
