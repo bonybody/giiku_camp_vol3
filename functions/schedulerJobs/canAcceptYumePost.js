@@ -14,7 +14,7 @@ module.exports = functions.pubsub.schedule('0 8 * * *')
       const usersRef = firestore.collection('users')
       const usersSnap = await usersRef.where('notification', '==', true).get()
       await Promise.all(usersSnap.docs.map(async (snap) => {
-        snap.ref.update({ can_accept_yume_post: true })
+        await snap.ref.update({ can_accept_yume_post: true })
         return await botClient.pushMessage(snap.id, { type: 'text', text: '8時になりました、ユメポストからユメを受け取れます。' })
       }))
     } catch (e) {
