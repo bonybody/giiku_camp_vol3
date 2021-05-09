@@ -53,7 +53,14 @@ module.exports = function () {
       return createYumeColumn(yume.data().title, category.data().text, siteUrl + '/yume_kioku/' + snap.id, image)
     }))
     if (columns.length === 0) {
-      return true
+      return await client.replyMessage(theEvent.replyToken,
+        [
+          {
+            type: 'text',
+            text: 'お気に入り登録されているユメはありません'
+          }
+        ]
+      )
     }
     return await client.replyMessage(theEvent.replyToken,
       [
@@ -64,6 +71,10 @@ module.exports = function () {
             type: 'carousel',
             columns
           }
+        },
+        {
+          type: 'text',
+          text: '表示される内容は、最大で5件までです。\n「ユメの記憶」でより詳細に確認できます。'
         }
       ]
     )
